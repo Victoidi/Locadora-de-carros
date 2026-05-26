@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}Inventario | GreenRide{% endblock %}
+
+{% block content %}
+<section class="hero-panel mb-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <span class="eyebrow"><i class="bi bi-car-front-fill"></i> Cadastro de frota</span>
+            <h2 class="hero-title">Atualize o inventario e acelere a reserva.</h2>
+            <p class="hero-subtitle">
+                Preencha os dados tecnicos do veiculo e mantenha os valores atualizados para gerar propostas mais rapidas.
+                A marca e selecionada direto do banco, sem preenchimento manual repetitivo.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <a class="btn btn-brand" href="{{ url_for('clientes') }}"><i class="bi bi-person-plus me-1"></i>Cadastrar cliente</a>
+                <a class="btn btn-outline-brand" href="{{ url_for('pagamentos') }}"><i class="bi bi-receipt me-1"></i>Consultar pagamentos</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1100&q=80" alt="Carro em estrada aberta">
+                <div class="hero-note">Cidade ou estrada: monte uma frota com perfil certo para cada cliente.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row g-4">
+    <div class="col-xl-4">
+        <div class="card app-card h-100">
+            <div class="card-body p-4">
+                <h4 class="mb-1">Novo veiculo</h4>
+                <p class="text-muted mb-4">Campos essenciais para publicar rapidamente no inventario.</p>
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Modelo</label>
+                        <input type="text" name="nm_modelo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ano</label>
+                        <input type="text" name="nr_ano" class="form-control" maxlength="4" placeholder="Ex: 2023">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Transmissao</label>
+                        <input type="text" name="tp_transmissao" class="form-control" placeholder="Automatica ou manual" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Motor</label>
+                        <input type="text" name="tp_motor" class="form-control" placeholder="Ex: 1.0 Turbo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Combustivel</label>
+                        <input type="text" name="tp_combustivel" class="form-control" placeholder="Flex, diesel, eletrico" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Valor FIPE</label>
+                        <input type="text" name="vl_fipe" class="form-control" placeholder="Ex: 45650.23" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Valor da diaria</label>
+                        <input type="text" name="vl_diaria" class="form-control" placeholder="Ex: 219.90" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Marca</label>
+                        <select name="id_marca" class="form-select" required>
+                            <option value="">Selecione a marca</option>
+                            {% for marca in marcas %}
+                            <option value="{{ marca.id_marca }}">{{ marca.nm_marca }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-brand w-100">Cadastrar veiculo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-8">
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <div class="photo-tile">
+                    <img src="https://images.unsplash.com/photo-1462392246754-28dfa2df8e6b?auto=format&fit=crop&w=1100&q=80" alt="Carros em avenida urbana">
+                    <div class="photo-copy">
+                        <h6 class="mb-1">Mobilidade urbana</h6>
+                        <p class="mb-0 text-muted">Modelos ideais para rotina na cidade, com praticidade e economia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="photo-tile">
+                    <img src="{{ url_for('static', filename='images/car-interior.svg') }}" alt="Detalhe interior de carro">
+                    <div class="photo-copy">
+                        <h6 class="mb-1">Conforto interno</h6>
+                        <p class="mb-0 text-muted">Interiores bem apresentados aumentam a taxa de conversao da reserva.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card app-card table-surface">
+            <div class="card-body p-0">
+                <div class="p-3 p-md-4 border-bottom">
+                    <h4 class="mb-1">Veiculos recem cadastrados</h4>
+                    <p class="text-muted mb-0">Ultimos registros da frota disponivel para locacao.</p>
+                    <div class="mt-3">
+                        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                            <span class="small text-muted fw-semibold">Filtrar por marca:</span>
+                            <a
+                                href="{{ url_for('inventario', ano=filtro_ano if filtro_ano else None) }}"
+                                class="btn btn-sm {{ 'btn-brand' if not filtro_marca else 'btn-outline-brand' }}">
+                                Todas
+                            </a>
+                            {% for marca in marcas %}
+                            <a
+                                href="{{ url_for('inventario', marca=marca.nm_marca, ano=filtro_ano if filtro_ano else None) }}"
+                                class="btn btn-sm {{ 'btn-brand' if filtro_marca == marca.nm_marca else 'btn-outline-brand' }}">
+                                <span class="brand-mini-logo">{{ marca.nm_marca[:1]|upper }}</span>{{ marca.nm_marca }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex flex-wrap align-items-center gap-2">
+                            <span class="small text-muted fw-semibold">Filtrar por ano:</span>
+                            <a
+                                href="{{ url_for('inventario', marca=filtro_marca if filtro_marca else None) }}"
+                                class="btn btn-sm {{ 'btn-brand' if not filtro_ano else 'btn-outline-brand' }}">
+                                Todos
+                            </a>
+                            {% for ano in anos_disponiveis %}
+                            <a
+                                href="{{ url_for('inventario', marca=filtro_marca if filtro_marca else None, ano=ano) }}"
+                                class="btn btn-sm {{ 'btn-brand' if filtro_ano == ano else 'btn-outline-brand' }}">
+                                {{ ano }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Marca</th>
+                                <th>Ano</th>
+                                <th>Transmissao</th>
+                                <th>Combustivel</th>
+                                <th>Valor FIPE</th>
+                                <th>Diaria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for veiculo in veiculos %}
+                            <tr>
+                                <td>{{ veiculo.nm_modelo }}</td>
+                                <td>{{ veiculo.nm_marca }}</td>
+                                <td>{{ veiculo.nr_ano or '-' }}</td>
+                                <td>{{ veiculo.tp_transmissao }}</td>
+                                <td>{{ veiculo.tp_combustivel }}</td>
+                                <td>R$ {{ '%.2f'|format(veiculo.vl_fipe) if veiculo.vl_fipe is not none else '-' }}</td>
+                                <td>R$ {{ '%.2f'|format(veiculo.vl_diaria) if veiculo.vl_diaria is not none else '-' }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center text-muted py-4">Nenhum veiculo encontrado.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

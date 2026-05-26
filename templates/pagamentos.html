@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Pagamentos | GreenRide{% endblock %}
+
+{% block content %}
+<section class="hero-panel mb-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <span class="eyebrow"><i class="bi bi-receipt-cutoff"></i> Controle financeiro</span>
+            <h2 class="hero-title">Consulta de pagamentos com visao completa da reserva.</h2>
+            <p class="hero-subtitle">
+                Relatorio consolidado via JOIN entre pagamento, cliente, inventario e marca para dar contexto de valor e diaria.
+            </p>
+        </div>
+        <div class="col-lg-5">
+            <div class="hero-visual">
+                <img
+                    src="{{ url_for('static', filename='images/car-interior.svg') }}"
+                    alt="Painel interno de carro premium"
+                    referrerpolicy="no-referrer">
+                <div class="hero-note">Acompanhe transacoes com clareza e tome decisoes com dados em tempo real.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="card app-card table-surface">
+    <div class="card-body p-0">
+        <div class="p-3 p-md-4 border-bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div>
+                <h4 class="mb-1">Historico de pagamentos</h4>
+                <p class="text-muted mb-0">Ordem decrescente por data e identificador.</p>
+            </div>
+            <a href="{{ url_for('inventario') }}" class="btn btn-outline-brand align-self-md-center">Nova reserva</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Tipo</th>
+                        <th>Data</th>
+                        <th>Diarias</th>
+                        <th>Valor FIPE</th>
+                        <th>Valor Diaria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pagamento in pagamentos %}
+                    <tr>
+                        <td>{{ pagamento.nome_cliente }}</td>
+                        <td>{{ pagamento.modelo_veiculo }}</td>
+                        <td>{{ pagamento.marca_veiculo }}</td>
+                        <td>
+                            <span class="badge rounded-pill text-bg-light border border-success-subtle text-success-emphasis">
+                                {{ tipos_pagamento.get(pagamento.tp_pagamento, pagamento.tp_pagamento) }}
+                            </span>
+                        </td>
+                        <td>{{ pagamento.dt_data.strftime('%d/%m/%Y %H:%M') if pagamento.dt_data else '-' }}</td>
+                        <td>{{ pagamento.qt_quantidade }}</td>
+                        <td>R$ {{ '%.2f'|format(pagamento.vl_fipe) if pagamento.vl_fipe is not none else '-' }}</td>
+                        <td>R$ {{ '%.2f'|format(pagamento.vl_diaria) if pagamento.vl_diaria is not none else '-' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">Nenhum pagamento encontrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Cadastro | GreenRide{% endblock %}
+{% block body_class %}auth-shell{% endblock %}
+
+{% block content %}
+<div class="row g-4 align-items-stretch">
+    <div class="col-lg-7 order-2 order-lg-1">
+        <div class="card app-card h-100">
+            <div class="card-body p-4 p-lg-5">
+                <span class="eyebrow"><i class="bi bi-person-vcard-fill"></i> Cadastro de funcionario</span>
+                <h2 class="hero-title fs-3">Crie um novo acesso ao sistema</h2>
+                <p class="text-muted">As credenciais sao protegidas com hash seguro para manter o acesso confiavel.</p>
+                <form method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Primeiro nome</label>
+                            <input type="text" name="nm_primeiro" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Sobrenome</label>
+                            <input type="text" name="nm_ultimo" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Login</label>
+                            <input type="text" name="ds_login" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Senha</label>
+                            <input type="password" name="senha" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Confirmar senha</label>
+                            <input type="password" name="confirmar_senha" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Telefone (opcional)</label>
+                            <input type="text" name="nr_telefone" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">CPF (opcional)</label>
+                            <input type="text" name="nr_cpf" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cargo (opcional)</label>
+                            <input type="text" name="ds_cargo" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Data de admissao (opcional)</label>
+                            <input type="date" name="dt_admissao" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-brand w-100 mt-4">Cadastrar</button>
+                </form>
+                <div class="soft-divider"></div>
+                <div class="small">
+                    Ja possui conta? <a href="{{ url_for('login') }}">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 order-1 order-lg-2">
+        <div class="row g-3 h-100">
+            <div class="col-12">
+                <div class="photo-tile h-100">
+                    <img src="https://images.unsplash.com/photo-1519643381401-22c77e60520e?auto=format&fit=crop&w=1000&q=80" alt="Carro em ambiente urbano">
+                    <div class="photo-copy">
+                        <h6 class="mb-1">Equipe conectada</h6>
+                        <p class="mb-0 text-muted">Cadastre colaboradores para manter atendimento rapido e organizado.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="photo-tile">
+                    <img src="{{ url_for('static', filename='images/car-interior.svg') }}" alt="Detalhe interior do carro">
+                    <div class="photo-copy">
+                        <h6 class="mb-1">Padrao GreenRide</h6>
+                        <p class="mb-0 text-muted">Interface pensada para mobilidade, liberdade e decisao rapida de reserva.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

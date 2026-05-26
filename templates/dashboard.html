@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | GreenRide{% endblock %}
+
+{% block content %}
+<section class="hero-panel mb-4 mb-lg-5">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <span class="eyebrow"><i class="bi bi-lightning-charge-fill"></i> Mobilidade sem atrito</span>
+            <h1 class="hero-title">Reserve em minutos e leve seus clientes para a estrada com estilo.</h1>
+            <p class="hero-subtitle">
+                A GreenRide combina cadastro rapido, inventario organizado e consulta de pagamentos em uma experiencia fluida.
+                Tudo para acelerar o fechamento da reserva.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <a class="btn btn-brand btn-lg" href="{{ url_for('inventario') }}">
+                    <i class="bi bi-car-front me-1"></i>Iniciar reserva
+                </a>
+                <a class="btn btn-outline-brand btn-lg" href="{{ url_for('clientes') }}">
+                    <i class="bi bi-person-plus me-1"></i>Novo cliente
+                </a>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <span class="metric-chip"><i class="bi bi-clock-history"></i> Processo rapido</span>
+                <span class="metric-chip"><i class="bi bi-shield-check"></i> Dados centralizados</span>
+                <span class="metric-chip"><i class="bi bi-cash-coin"></i> Operacao previsivel</span>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80" alt="Carro moderno em estrada">
+                <div class="hero-note">Frota pronta para cidade e estrada, com visual premium e manutencao em dia.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="kpi-card h-100">
+            <p class="kpi-label">Marcas ativas</p>
+            <h3 class="kpi-value">{{ estatisticas.total_marcas }}</h3>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="kpi-card h-100">
+            <p class="kpi-label">Veiculos</p>
+            <h3 class="kpi-value">{{ estatisticas.total_veiculos }}</h3>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="kpi-card h-100">
+            <p class="kpi-label">Clientes</p>
+            <h3 class="kpi-value">{{ estatisticas.total_clientes }}</h3>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="kpi-card h-100">
+            <p class="kpi-label">Pagamentos</p>
+            <h3 class="kpi-value">{{ estatisticas.total_pagamentos }}</h3>
+        </div>
+    </div>
+</div>
+
+<section class="row g-4">
+    <div class="col-lg-7">
+        <div class="card app-card h-100">
+            <div class="card-body">
+                <h4 class="section-title">Fluxo rapido de reserva</h4>
+                <p class="section-subtitle mb-3">Organize o atendimento em tres passos simples para ganhar velocidade comercial.</p>
+                <div class="reservation-steps mb-4">
+                    <div class="step-card">
+                        <span class="step-index">1</span>
+                        <h6>Cliente</h6>
+                        <p class="mb-0 text-muted">Cadastre o cliente com endereco completo e deixe os dados prontos.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-index">2</span>
+                        <h6>Veiculo</h6>
+                        <p class="mb-0 text-muted">Selecione marca, modelo e preco para montar a oferta ideal.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-index">3</span>
+                        <h6>Fechamento</h6>
+                        <p class="mb-0 text-muted">Valide o pagamento e acompanhe todas as locacoes no historico.</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-outline-brand" href="{{ url_for('clientes') }}">Ir para clientes</a>
+                    <a class="btn btn-outline-brand" href="{{ url_for('inventario') }}">Ir para inventario</a>
+                    <a class="btn btn-outline-brand" href="{{ url_for('pagamentos') }}">Ver pagamentos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="photo-tile mb-3">
+            <img src="https://images.unsplash.com/photo-1471478331149-c72f17e33c73?auto=format&fit=crop&w=1000&q=80" alt="Carros em cidade">
+            <div class="photo-copy">
+                <h6 class="mb-1">Cidade</h6>
+                <p class="mb-0 text-muted">Frota preparada para deslocamentos urbanos com conforto e agilidade.</p>
+            </div>
+        </div>
+        <div class="photo-tile">
+                    <img src="{{ url_for('static', filename='images/car-interior.svg') }}" alt="Interior de veiculo">
+            <div class="photo-copy">
+                <h6 class="mb-1">Interior premium</h6>
+                <p class="mb-0 text-muted">Detalhes internos valorizam a experiencia do cliente e elevam a percepcao de qualidade.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

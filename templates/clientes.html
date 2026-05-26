@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Clientes | GreenRide{% endblock %}
+
+{% block content %}
+<section class="hero-panel mb-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <span class="eyebrow"><i class="bi bi-people-fill"></i> Gestao de clientes</span>
+            <h2 class="hero-title">Cadastre clientes para destravar reservas sem friccao.</h2>
+            <p class="hero-subtitle">
+                Com dados consistentes de cadastro, o atendimento fica mais rapido e os pagamentos sao vinculados sem retrabalho.
+            </p>
+        </div>
+        <div class="col-lg-5">
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1100&q=80" alt="Carro em via urbana">
+                <div class="hero-note">Clientes bem cadastrados melhoram a jornada de locacao do inicio ao fim.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card app-card h-100">
+            <div class="card-body p-4">
+                <h4 class="mb-2">Novo cliente</h4>
+                <p class="text-muted mb-4">Dados basicos para iniciar uma nova reserva.</p>
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Primeiro nome</label>
+                        <input type="text" name="nm_primeiro" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sobrenome</label>
+                        <input type="text" name="nm_ultimo" class="form-control" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Endereco</label>
+                        <textarea name="ds_endereco" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-brand w-100">Salvar cliente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card app-card table-surface">
+            <div class="card-body p-0">
+                <div class="p-3 p-md-4 border-bottom">
+                    <h4 class="mb-1">Clientes recentes</h4>
+                    <p class="text-muted mb-0">Ultimos clientes cadastrados para novas locacoes.</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Endereco</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                            <tr>
+                                <td>{{ cliente.nm_primeiro }} {{ cliente.nm_ultimo }}</td>
+                                <td>{{ cliente.ds_endereco }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="text-center text-muted py-4">Nenhum cliente encontrado.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

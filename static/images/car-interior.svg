@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Interior de carro</title>
+  <desc id="desc">Ilustracao de painel interno de carro com volante e console central.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f2933"/>
+      <stop offset="100%" stop-color="#0f1720"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dff3ff" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#8fbcd2" stop-opacity=".45"/>
+    </linearGradient>
+    <linearGradient id="dash" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3642"/>
+      <stop offset="100%" stop-color="#1a232c"/>
+    </linearGradient>
+    <radialGradient id="wheel" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#3d4956"/>
+      <stop offset="100%" stop-color="#151d24"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg)"/>
+
+  <path d="M0 0h1200v290c-95 35-246 62-417 62-271 0-514-61-783-160V0z" fill="url(#glass)" opacity=".95"/>
+  <rect x="0" y="220" width="1200" height="480" fill="url(#dash)"/>
+
+  <path d="M65 398c50-40 124-65 202-65h662c84 0 158 25 206 65v240H65V398z" fill="#202a33"/>
+  <path d="M112 470h976v155H112z" fill="#151d24"/>
+
+  <circle cx="332" cy="496" r="126" fill="url(#wheel)"/>
+  <circle cx="332" cy="496" r="85" fill="#0f151b"/>
+  <circle cx="332" cy="496" r="35" fill="#2fba41"/>
+  <path d="M332 376c40 0 74 18 96 47l-51 30c-12-16-27-25-45-25s-33 9-45 25l-51-30c22-29 56-47 96-47z" fill="#2c3743"/>
+  <path d="M332 616c-40 0-74-18-96-47l51-30c12 16 27 25 45 25s33-9 45-25l51 30c-22 29-56 47-96 47z" fill="#2c3743"/>
+
+  <rect x="498" y="404" width="262" height="128" rx="18" fill="#121920" stroke="#2f3d4b" stroke-width="4"/>
+  <rect x="518" y="424" width="222" height="36" rx="8" fill="#1d2833"/>
+  <rect x="518" y="470" width="138" height="22" rx="6" fill="#1d2833"/>
+  <rect x="664" y="470" width="76" height="22" rx="6" fill="#2fba41"/>
+
+  <g opacity=".9">
+    <rect x="178" y="286" width="180" height="68" rx="10" fill="#1a242f"/>
+    <rect x="390" y="286" width="180" height="68" rx="10" fill="#1a242f"/>
+    <rect x="602" y="286" width="180" height="68" rx="10" fill="#1a242f"/>
+    <rect x="814" y="286" width="180" height="68" rx="10" fill="#1a242f"/>
+    <rect x="196" y="304" width="144" height="32" rx="6" fill="#2fba41"/>
+    <rect x="408" y="304" width="144" height="32" rx="6" fill="#293748"/>
+    <rect x="620" y="304" width="144" height="32" rx="6" fill="#293748"/>
+    <rect x="832" y="304" width="144" height="32" rx="6" fill="#293748"/>
+  </g>
+
+  <path d="M0 620c168-42 367-58 598-58 236 0 431 17 602 60v78H0v-80z" fill="#0c1217"/>
+</svg>
